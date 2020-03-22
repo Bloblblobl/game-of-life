@@ -3,9 +3,11 @@ import time
 
 square = u"\u2588" * 2
 
-width = 25
-height = 25
+width = 30
+height = 30
 lines = []
+offsety = 2
+offsetx = 23
 
 for line in lines:
     s = ''.join(line)
@@ -24,7 +26,7 @@ def display_board():
     for line in lines:
         s = ''.join(line)
         print(s)
-    time.sleep(1)
+    time.sleep(0.05)
 
 
 def find_neighbors(row, col):
@@ -63,7 +65,7 @@ def update_board():
     for row in range(height):
         for col in range(width):
             n = find_neighbors(row, col)
-            if (n == 2) or (n == 3) and lines[row][col] == square:
+            if n in (2, 3) and lines[row][col] == square:
                 board[row][col] = square
             if lines[row][col] != square and n == 3:
                 board[row][col] = square
@@ -74,19 +76,19 @@ def update_board():
 def main():
     global lines
     lines = create_new_board()
-    lines[0][0] = square
-    lines[1][0] = square
-    lines[0][1] = square
-    lines[1][1] = square
-    # lines[1+10][15+3] = square
-    # lines[1+10][6+15] = square
-    # lines[2+10][2+15] = square
-    # lines[3+10][2+15] = square
-    # lines[3+10][6+15] = square
-    # lines[4+10][2+15] = square
-    # lines[4+10][3+15] = square
-    # lines[4+10][4+15] = square
-    # lines[4+10][5+15] = square
+    # lines[0][0] = square
+    # lines[1][0] = square
+    # lines[0][1] = square
+    # lines[1][1] = square
+    lines[1+offsety][3+offsetx] = square
+    lines[1+offsety][6+offsetx] = square
+    lines[2+offsety][2+offsetx] = square
+    lines[3+offsety][2+offsetx] = square
+    lines[3+offsety][6+offsetx] = square
+    lines[4+offsety][2+offsetx] = square
+    lines[4+offsety][3+offsetx] = square
+    lines[4+offsety][4+offsetx] = square
+    lines[4+offsety][5+offsetx] = square
     while True:
         lines = update_board()
         display_board()
